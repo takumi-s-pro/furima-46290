@@ -1,6 +1,6 @@
 # README
 # プロジェクト名
-furima
+furima-46290
 
 ### テーブル一覧
 
