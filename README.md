@@ -33,7 +33,7 @@ has_many :buys
 | prefecture_id   | integer    | null: false                    | 発送元地域（ActiveHash想定）    |
 | shipping_day_id | integer    | null: false                    | 発送までの日数（ActiveHash想定）|
 | price           | integer    | null: false                    | 販売価格                       |
-| user            | references | null: false, foreign key: true | 出品者（usersテーブル参照）      |
+| user            | references | null: false, foreign_key: true | 出品者（usersテーブル参照）      |
 
 
 ### Association
@@ -43,8 +43,8 @@ has_one :buy
 #### 3. buysテーブル
 | カラム名      | 型         | 制約                           | 説明               |
 |--------------|------------|--------------------------------|-------------------|
-| user         | references | null: false, foreign key: true | 購入したユーザー   |
-| item         | references | null: false, foreign key: true | 購入した商品       |
+| user         | references | null: false, foreign_key: true | 購入したユーザー   |
+| item         | references | null: false, foreign_key: true | 購入した商品       |
 
 
 ### Association
@@ -62,7 +62,7 @@ has_one :address
 | address         | string     | null: false                    | 番地                     |
 | building_name   | string     |                                | 建物名                   |
 | phone_number    | string     | null: false                    | 電話番号                 |
-| buy             | references | null: false, foreign key: true | 購入情報                 |
+| buy             | references | null: false, foreign_key: true | 購入情報                 |
 
 
 ### Association
