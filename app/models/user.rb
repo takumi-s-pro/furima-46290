@@ -8,8 +8,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   # 名前（全角ひらがな・カタカナ・漢字）
-  validates :last_name,  presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: "is invalid. Input full-width characters" }
-  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: "is invalid. Input full-width characters" }
+  validates :last_name,  presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters" }
+  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters" }
 
   # フリガナ（全角カタカナ）
   validates :last_name_kana,  presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters" }
@@ -22,6 +22,6 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}\z/i, message: "is invalid. Include both letters and numbers" }
 
 
-  has_many :items
-  has_many :buys
+  #has_many :items
+  #has_many :buys
 end
