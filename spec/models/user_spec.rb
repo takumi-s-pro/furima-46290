@@ -55,14 +55,14 @@ RSpec.describe User, type: :model do
         @user.password = 'abcdef'
         @user.password_confirmation = 'abcdef'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is invalid')
+        expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
       end
 
       it 'パスワードは半角英数字混合での入力が必須であること（数字のみNG）' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is invalid')
+        expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
       end
 
       it 'パスワードとパスワード（確認）が一致しないと登録できないこと' do
@@ -86,13 +86,13 @@ RSpec.describe User, type: :model do
       it '名字は全角（漢字・ひらがな・カタカナ）でなければならないこと' do
         @user.last_name = 'yamada'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name is invalid')
+        expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters")
       end
 
       it '名前は全角（漢字・ひらがな・カタカナ）でなければならないこと' do
         @user.first_name = 'taro'
         @user.valid?
-        expect(@user.errors.full_messages).to include('First name is invalid')
+        expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters")
       end
 
       it '名字カナが必須であること' do
@@ -110,13 +110,13 @@ RSpec.describe User, type: :model do
       it '名字カナは全角カタカナでなければならないこと' do
         @user.last_name_kana = 'やまだ'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana is invalid')
+        expect(@user.errors.full_messages).to include('Last name kana is invalid. Input full-width katakana characters')
       end
 
       it '名前カナは全角カタカナでなければならないこと' do
         @user.first_name_kana = 'たろう'
         @user.valid?
-        expect(@user.errors.full_messages).to include('First name kana is invalid')
+        expect(@user.errors.full_messages).to include('First name kana is invalid. Input full-width katakana characters')
       end
 
       it '生年月日が必須であること' do
