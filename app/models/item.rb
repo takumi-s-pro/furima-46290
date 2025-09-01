@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :shipping_day
-  end
 
   #バリデーション
   validates :name, presence: true
