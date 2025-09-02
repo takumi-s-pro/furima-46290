@@ -12,9 +12,9 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     if @item.save
-      redirect_to @item
+      redirect_to root_path @item
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
