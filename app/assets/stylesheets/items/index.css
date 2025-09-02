@@ -292,6 +292,9 @@ a {
   justify-content: space-between;
 }
 
+.item-postage {
+  font-size: 1.5vh;
+}
 
 .star-btn {
   display: flex;
