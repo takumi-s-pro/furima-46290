@@ -40,35 +40,35 @@ RSpec.describe Item, type: :model do
       it 'category_idが「---」(id: 1)では登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       # --- 商品の状態に関するテスト ---
       it 'condition_idが「---」(id: 1)では登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
       # --- 配送料の負担に関するテスト ---
       it 'postage_idが「---」(id: 1)では登録できない' do
         @item.postage_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage must be other than 1")
+        expect(@item.errors.full_messages).to include('Postage must be other than 1')
       end
 
       # --- 発送元の地域に関するテスト ---
       it 'prefecture_idが「---」(id: 1)では登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       # --- 発送までの日数に関するテスト ---
       it 'shipping_day_idが「---」(id: 1)では登録できない' do
         @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping day must be other than 1')
       end
 
       # --- 価格に関するテスト ---
@@ -81,31 +81,31 @@ RSpec.describe Item, type: :model do
       it 'priceが¥300未満では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'priceが¥9,999,999を超えると登録できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it 'priceが半角数値でないと登録できない（全角の場合）' do
         @item.price = '３００' # 全角数字
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが半角英数混合では登録できない' do
         @item.price = '300a'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが半角英語だけでは登録できない' do
         @item.price = 'abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       # --- アソシエーションに関するテスト ---
@@ -117,4 +117,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Items", type: :system do
+RSpec.describe 'Items', type: :system do
   before do
     # テスト用のユーザーと、そのユーザーが出品する商品のダミーデータを作成
     @user = FactoryBot.create(:user)
@@ -36,9 +36,9 @@ RSpec.describe "Items", type: :system do
       expect(page).to have_selector('#profit-price', text: profit.to_s)
 
       # 6. 「出品する」ボタンを押すと、Itemモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { Item.count }.by(1)
+      end.to change { Item.count }.by(1)
 
       # 7. トップページに遷移することを確認する
       expect(current_path).to eq(root_path)
@@ -62,9 +62,9 @@ RSpec.describe "Items", type: :system do
       fill_in 'item-name', with: '' # 商品名を空にする
 
       # 4. Itemモデルのカウントが変わらないことを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { Item.count }.by(0)
+      end.to change { Item.count }.by(0)
 
       # 5. 出品ページに戻される（パスが変わらない）ことを確認する
       expect(current_path).to eq(items_path)
@@ -87,7 +87,6 @@ RSpec.describe "Items", type: :system do
     end
   end
 
-  
   def sign_in(user)
     visit new_user_session_path
     fill_in 'email', with: user.email
