@@ -26,7 +26,7 @@
     <% if user_signed_in? %>
       <% if current_user.id == @item.user_id %>
         <%# 出品者の場合 %>
-        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn", id:"edit-item-btn" %>
+        <%= link_to "商品の編集", edit_item_path(@item), class: "item-red-btn", id:"edit-item-btn" %>
         <p class="or-text" id="or-text">or</p>
         <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy", id:"destroy-item-btn" %>
       <% else %>
