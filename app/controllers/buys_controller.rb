@@ -1,6 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index, :create]
+  before_action :set_item, only: 
   before_action :move_to_root, only: [:index, :create]
 
   def index
