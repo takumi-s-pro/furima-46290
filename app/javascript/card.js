@@ -1,4 +1,7 @@
 const pay = () => {
+  const numberElementDiv = document.getElementById('number-form');
+  if (!numberElementDiv) return; 
+
   const publicKey = gon.public_key
   const payjp = Payjp(publicKey)
   const elements = payjp.elements();
@@ -17,7 +20,6 @@ const pay = () => {
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
         alert("カード情報が正しくありません。");
-
       } else {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
@@ -34,3 +36,4 @@ const pay = () => {
 };
 
 document.addEventListener("turbo:load", pay);
+document.addEventListener("turbo:render", pay);

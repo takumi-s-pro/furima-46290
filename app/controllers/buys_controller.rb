@@ -5,6 +5,7 @@ class BuysController < ApplicationController
 
   def index
     @buy = Buy.new
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
   end
 
   def create
