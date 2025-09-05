@@ -13,15 +13,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @buy = Buy.new(buy_params)
-    if @buy.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: params[:token],
-        currency: 'jpy'
-      )
-      @buy.save
+    @item = Item.new(item_params)
+    if @item.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
