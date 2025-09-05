@@ -64,4 +64,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :system # system spec 用
   config.include Devise::Test::ControllerHelpers, type: :controller # controller spec 用
+  config.around(:each) do |example|
+    ActiveRecord::Base.connection_pool.with_connection do
+      example.run
+    end
+  end
 end

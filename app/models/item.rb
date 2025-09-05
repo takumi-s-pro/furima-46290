@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :buy
 
   # ActiveHash
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -15,7 +16,7 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :category_id, presence: true, numericality: { other_than: 1 }
   validates :condition_id, presence: true, numericality: { other_than: 1 }
-  validates :postage_id, presence: true, numericality: { other_than: 1 }
+  validates :postage_id, presence: true, numericality: { other_than: 0 }
   validates :prefecture_id, presence: true, numericality: { other_than: 1 }
   validates :shipping_day_id, presence: true, numericality: { other_than: 1 }
   validates :price, presence: true,
@@ -23,6 +24,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
 
   def sold_out?
-    false
+    buy.present?
   end
 end
