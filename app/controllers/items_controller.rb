@@ -13,8 +13,15 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.build(item_params)
-    if @item.save
+    @buy = Buy.new(buy_params)
+    if @buy.valid?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: params[:token],
+        currency: 'jpy'
+      )
+      @buy.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -61,5 +68,9 @@ class ItemsController < ApplicationController
     if @item.buy.present? || current_user.id != @item.user_id
       redirect_to root_path
     end
+  end
+
+  def move_to_root
+    redirect_to root_path if current_user.id == @item.user_id || @item.buy.present?
   end
 end

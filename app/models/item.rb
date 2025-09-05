@@ -24,6 +24,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
 
   def sold_out?
-    false
+    buy.present?
   end
 end

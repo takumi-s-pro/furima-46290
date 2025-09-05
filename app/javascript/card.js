@@ -1,6 +1,6 @@
 const pay = () => {
   const numberElementDiv = document.getElementById('number-form');
-  if (!numberElementDiv) return; 
+  if (!numberElementDiv) return;
 
   const publicKey = gon.public_key
   const payjp = Payjp(publicKey)
@@ -16,20 +16,31 @@ const pay = () => {
 
   const form = document.getElementById('charge-form');
   form.addEventListener("submit", (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
-        alert("カード情報が正しくありません。");
       } else {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
+
+        const existingToken = renderDom.querySelector("input[name='token']");
+        if (existingToken) {
+          existingToken.remove();
+        }
+
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
+
+        numberElement.clear();
+        expiryElement.clear();
+        cvcElement.clear();
       }
 
-      numberElement.clear();
-      expiryElement.clear();
-      cvcElement.clear();
+      const submitBtn = form.querySelector('input[type="submit"]');
+      if(submitBtn){
+        submitBtn.disabled = true;
+      }
+
       form.submit();
     });
   });
