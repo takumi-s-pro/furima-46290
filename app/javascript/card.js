@@ -19,6 +19,9 @@ const pay = () => {
     e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
+        if(submitBtn){
+          submitBtn.disabled = false;
+        }
       } else {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
@@ -34,14 +37,8 @@ const pay = () => {
         numberElement.clear();
         expiryElement.clear();
         cvcElement.clear();
-      }
-
-      const submitBtn = form.querySelector('input[type="submit"]');
-      if(submitBtn){
-        submitBtn.disabled = true;
-      }
-
       form.submit();
+      }
     });
   });
 };
