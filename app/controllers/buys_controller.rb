@@ -14,6 +14,7 @@ class BuysController < ApplicationController
     if @buy_address.valid?
       pay_item
       @buy_address.save
+      Buy.create!(user_id: current_user.id, item_id: @item.id)
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
