@@ -10,7 +10,7 @@ class BuysController < ApplicationController
 
   def create
     @buy = Buy.create!(user_id: current_user.id, item_id: @item.id)
-    @buy_address = BuyAddress.new(buy_address_params)
+    @buy_address = BuyAddress.new(buy_address_params.merge(buy_id: @buy.id))
     
     if @buy_address.valid?
       pay_item
