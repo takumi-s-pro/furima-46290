@@ -61,3 +61,6 @@
 #   }
 
 server '18.179.177.123', user: 'ec2-user', roles: %w{app db web}
+  keys: %w(~/.ssh/my-key-pair.pem),
+  forward_agent: true,
+  auth_methods: %w(publickey)
